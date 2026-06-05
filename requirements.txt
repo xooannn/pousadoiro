@@ -1,5 +1,11 @@
 streamlit>=1.32.0
 pandas>=2.0.0
 plotly>=5.18.0
-supabase>=2.3.0
+supabase==2.3.1
+gotrue==2.1.0
+postgrest==0.16.1
+realtime==1.0.6
+storage3==0.7.0
+httpx==0.26.0
 openpyxl>=3.1.0
+ 
