@@ -160,7 +160,6 @@ def formato_tiempo(min_float):
         return f"{m:02d}m {s:02d}s"
     except: return "00m 00s"
 
-@st.cache_data(ttl=3600)
 def cargar_supermercado_csv():
     """Carga el catálogo de alimentos desde Supabase."""
     try:
@@ -168,10 +167,10 @@ def cargar_supermercado_csv():
         if res.data:
             return pd.DataFrame(res.data)
         return pd.DataFrame()
-    except:
+    except Exception as e:
+        st.error(f"Error cargando alimentos: {e}")
         return pd.DataFrame()
 
-@st.cache_data(ttl=3600)
 def cargar_ejercicios_csv():
     """Carga el catálogo de ejercicios desde Supabase."""
     try:
@@ -180,7 +179,8 @@ def cargar_ejercicios_csv():
             df = pd.DataFrame(res.data)
             return df[['grupo_muscular', 'ejercicio']].dropna().drop_duplicates()
         return pd.DataFrame(columns=['grupo_muscular', 'ejercicio'])
-    except:
+    except Exception as e:
+        st.error(f"Error cargando ejercicios: {e}")
         return pd.DataFrame(columns=['grupo_muscular', 'ejercicio'])
 
 df_supermercado = cargar_supermercado_csv()
